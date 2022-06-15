@@ -46,7 +46,7 @@ export const genDiagram = async (filename: string, filecontent: string) => {
   const outputFilename = `${finalfilename}.png`;
   return new Promise((resolve: (output: string) => void, reject) => {
     exec(
-      `python ${pythonFile}`,
+      `python3 ${pythonFile}`,
       {
         cwd: tmpDir,
       },

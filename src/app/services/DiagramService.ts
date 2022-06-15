@@ -33,7 +33,7 @@ export const genDiagram = async (filecontent: string) => {
   const outputFilename = `${outputPrefix}/${slugifiedFilename}.png`;
   return new Promise((resolve: (output: string) => void, reject) => {
     exec(
-      `python ${pythonFile}`,
+      `python3 ${pythonFile}`,
       {
         cwd: tmpDir,
       },
