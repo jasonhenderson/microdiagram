@@ -162,10 +162,10 @@
 </script>
 
 <style>
-  textarea {
+  /* textarea {
     visibility: hidden;
-  }
-  pre {
+  } */
+  /* pre {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -182,19 +182,16 @@
     color: #ccc;
     tab-size: 2;
     -moz-tab-size: 2;
-  }
-  .codemirror-container {
-    position: relative;
+  } */
+
+  .code-area {
+    border: solid 1px #333;
     width: 100%;
     height: 100%;
-    border: none;
-    line-height: 1.5;
-    overflow: hidden;
-    border: solid 1px #333;
-    margin-top: 20px;
   }
+
 </style>
 
-<div class="codemirror-container flex">
+<div class="code-area">
   <textarea tabindex="0" bind:this={refs.editor} readonly {value} />
 </div>

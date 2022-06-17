@@ -63,6 +63,37 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
   }
 </script>
 
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
+
+<h1>Diagrams for Cloud Architecture</h1>
+
+{#if error}
+  <p><span style="color:red"> Something went wrong: </span> <br /> {error}</p>
+{/if}
+
+<div class="outer">
+  <div class="inner">
+    <button on:click={handleSubmit} disabled={loading}
+      >{loading ? `Processing...` : "Build"}</button
+    >
+    <CodeMirror
+      bind:this={_codeEditor}
+      value={filecontent}
+      on:change={(val) => (filecontent = val.detail.value)}
+    />
+    {#if result}
+      <figure>
+        <a download="" href={result} title="ImageName"> Click to download </a>
+        <img src={result} alt="" />
+      </figure>
+    {/if}
+  </div>
+
+  <ExamplesNav on:change={handleExampleChange} />
+</div>
+
 <style>
   h1,
   figure {
@@ -75,6 +106,11 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
     margin: 0 0 0.5em 0;
   }
 
+  button {
+    margin: 0 0 1em 0;
+    width: 200px;
+  }
+
   figure {
     margin: 0 0 1em 0;
   }
@@ -85,42 +121,14 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
     margin: 0 0 1em 0;
   }
 
-  .flex {
+  .outer {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 </style>
-
-<svelte:head>
-  <title>{title}</title>
-</svelte:head>
-
-<h1>Diagram for microservices</h1>
-
-{#if error}
-  <p><span style="color:red"> Something went wrong: </span> <br /> {error}</p>
-{/if}
-
-<div class="flex">
-  <div>
-    <button
-      on:click={handleSubmit}
-      disabled={loading}>{loading ? `Processing...` : 'Build'}</button>
-    <div class="flex">
-      <CodeMirror
-        bind:this={_codeEditor}
-        value={filecontent}
-        on:change={(val) => (filecontent = val.detail.value)} />
-    </div>
-    {#if result}
-      <figure>
-        <img src={result} alt="" />
-        <a download="" href={result} title="ImageName">
-          Click to download
-        </a>
-      </figure>
-    {/if}
-  </div>
-
-  <ExamplesNav on:change={handleExampleChange} />
-</div>
