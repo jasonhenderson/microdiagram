@@ -115,7 +115,7 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
     {#if result}
       <figure>
         <img src={result} alt="" />
-        <a download="diagram.png" href={result} title="ImageName">
+        <a download="" href={result} title="ImageName">
           Click to download
         </a>
       </figure>

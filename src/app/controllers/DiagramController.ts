@@ -6,13 +6,15 @@ export const create = async (req, res) => {
     const { filecontent } = req.body;
     const output = await DiagramService.genDiagram(filecontent);
     const file = await fsPromises.readFile(output);
+    var fileExt = output.split('.').pop();
 
     res.writeHead(200, {
-      "Content-Type": "image/png",
+      "Content-Type": fileExt == "svg" ? "image/svg+xml" : "image/png",
       "Content-Length": file.length,
     });
     res.end(file);
   } catch (e) {
+    console.error("error in diagram controller", e)
     res.writeHead(400, {
       "Content-Type": "application/json",
     });
